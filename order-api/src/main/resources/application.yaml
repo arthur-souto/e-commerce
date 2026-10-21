@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: kafka-listener
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:29092}
+    consumer:
+      group-id: "${KAFKA_CONSUMER_GROUP_ID:order-service-group-id}"
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+logging:
+  level:
+    org.apache.kafka: WARN
+    org.springframework.kafka: INFO

@@ -1,0 +1,25 @@
+server:
+  port: ${SERVER_PORT:8081}
+spring:
+  application:
+    name: store
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:29092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+  datasource:
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/product_db}
+    username: ${POSTGRES_USER:dev}
+    password: ${POSTGRES_PASSWORD:dev}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+kafka-topics:
+  product-created: ${KAFKA_TOPIC_PRODUCT_CREATED:product-created}
